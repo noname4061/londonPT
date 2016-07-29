@@ -12,7 +12,7 @@
         function initialize() {
             var mapProp = {
                 center: new google.maps.LatLng(51.508742, -0.120850),
-                zoom: 9,
+                zoom: 13,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 mapTypeControlOptions: {
                     style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
