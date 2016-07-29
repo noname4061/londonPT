@@ -13,7 +13,11 @@
             var mapProp = {
                 center: new google.maps.LatLng(51.508742, -0.120850),
                 zoom: 9,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControlOptions: {
+                    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                    position: google.maps.ControlPosition.TOP_RIGHT
+                },
             };
             map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
@@ -34,8 +38,11 @@
 </head>
 <body>
     <div id="workspace">
-        <button class="actionButton" id="bikePoints">Show bike points</button>
-        <div id="googleMap">
+        <div id="header">
+            <button class="actionButton" id="bikePoints">Show bike points</button>
+        </div>
+        <div id="googleMap"/>
+        <div id="footer">footer
         </div>
     </div>
 </body>
