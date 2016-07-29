@@ -29,9 +29,10 @@
     height: 100%;
     margin : auto;
 }
-.actionButton {
+.actionButton, .togleButtonUnpressed {
     /*float: left;*/
     padding: 4px;
+    margin: 0px;
     background-color: #1b1b1b;
     color: ghostwhite;
     border-style: solid;
@@ -39,4 +40,28 @@
     border-color: black;
     font-weight: bold;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+.actionButton:hover, .togleButtonUnpressed:hover, .togleButtonPressed:hover {
+    /*float: left;*/
+    padding: 4px;
+    margin: 0px;
+    background-color: #383838;
+    color: ghostwhite;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+.togleButtonPressed {
+    /*float: left;*/
+    padding: 4px;
+    margin: 0px;
+    background-color: gray;
+    color: ghostwhite;
+    border-style: groove;
+    border-width: 3px 2px 2px 3px;
+    border-color: black;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

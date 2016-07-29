@@ -21,16 +21,16 @@
             };
             map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-            map.addListener('click', function (e) {
-                if (window.userMarker) {
-                    userMarker.setMap(null);
-                }
+            //locationMarkerListener = map.addListener('click', function (e) {
+            //    if (window.userMarker) {
+            //        userMarker.setMap(null);
+            //    }
 
-                userMarker = new google.maps.Marker({
-                    position: e.latLng,
-                    map: map
-                });
-            });
+            //    userMarker = new google.maps.Marker({
+            //        position: e.latLng,
+            //        map: map
+            //    });
+            //});
         }
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -39,7 +39,8 @@
 <body>
     <div id="workspace">
         <div id="header">
-            <button class="actionButton" id="bikePoints">Show bike points</button>
+            <button class="actionButton" id="bikePointsButton">Show bike points</button>
+            <button class="togleButtonUnpressed" id="markLocationButton">Mark location</button>
         </div>
         <div id="googleMap"/>
         <div id="footer">footer

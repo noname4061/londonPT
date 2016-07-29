@@ -2,9 +2,29 @@
 
 (function () {
     $(document).ready(function () {
-        $('#bikePoints').click(function (e) {
+        $('#bikePointsButton').click(function (e) {
             //window.alert("sometext");
             ShowBikePoints();
+        });
+        $('#markLocationButton').click(function (e) {
+            if (e.currentTarget.className == "togleButtonUnpressed") {
+                e.currentTarget.className = "togleButtonPressed";
+
+                locationMarkerListener = map.addListener('click', function (e) {
+                    if (window.userMarker) {
+                        userMarker.setMap(null);
+                    }
+
+                    userMarker = new google.maps.Marker({
+                        position: e.latLng,
+                        map: map
+                    });
+                });
+            }
+            else {
+                e.currentTarget.className = "togleButtonUnpressed";
+                google.maps.event.removeListener(locationMarkerListener);
+            }
         });
     });
 
