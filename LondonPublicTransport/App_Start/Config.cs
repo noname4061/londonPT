@@ -13,7 +13,9 @@ namespace LondonPublicTransport.App_Start
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapPageRoute(null, "", "~/Pages/PublicTransport.aspx");
-            routes.MapHttpRoute(name: "WebApiRoute", routeTemplate: "transportapi/{controller}");
+            //routes.MapHttpRoute(name: "WebApiRoute", routeTemplate: "transportapi/{controller}");
+            routes.MapHttpRoute(name: "WebApiRoute", routeTemplate: "transportapi/{controller}/{lat}/{lng}/{radius}",
+                defaults: new { lat = RouteParameter.Optional, lng = RouteParameter.Optional , radius = RouteParameter.Optional });
         }
     }
 

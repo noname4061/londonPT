@@ -11,42 +11,37 @@ namespace LondonPublicTransport.Controllers
 {
     public class BikePlacesController : ApiController
     {
+        private const string appId = "aaab425f";
+        private const string appKey = "62823b9671d9450ff18e851274390e22";
+
         public IEnumerable<Place> Get()
         {
             var bikePointsUrl = @"https://api.tfl.gov.uk/BikePoint";
-            //var cycleSuperhighway = @"https://api.tfl.gov.uk/CycleSuperhighway";
-
-            List<Place> bikePlaces;
-
-            using (var wc = new WebClient())
-            {
-                wc.QueryString.Add("app_id", "aaab425f");
-                wc.QueryString.Add("app_key", "62823b9671d9450ff18e851274390e22");
-
-                var bikePointsString = wc.DownloadString(bikePointsUrl);
-                //ff = bikePointsString;
-                //var cycleSuperhighwayString = wc.DownloadString(cycleSuperhighway);
-
-                bikePlaces = JsonConvert.DeserializeObject<List<Place>>(bikePointsString);
-
-
-                //var dcs = new DataContractJsonSerializer(typeof(List<Place>));
-                //var responseObject = dcs.ReadObject(GenerateStreamFromString(bikePointsString));
-                //responseObject.ToString();
-
-                //var responseObject1 = TransportApiResponseParser.ParseListResponseWithCast<Place>(bikePointsString);
-                //responseObject1.ToString();
-
-
-                //var responseObject1 = TransportApiResponseParser.ParseListResponseWithCast<CycleSuperhighway>(cycleSuperhighwayString);
-
-                //var dcs1 = new DataContractSerializer(typeof(List<CycleSuperhighway>));
-                //var dcs1 = new DataContractJsonSerializer(typeof(List<CycleSuperhighway>));
-                //var responseObject1 = dcs1.ReadObject(GenerateStreamFromString(cycleSuperhighwayString));
-                //responseObject1.ToString();
-            }
+            var responseString = GetResponseString(bikePointsUrl);
+            List<Place> bikePlaces = JsonConvert.DeserializeObject<List<Place>>(responseString);
 
             return bikePlaces;
+        }
+
+        public IEnumerable<Place> Get(double lat, double lng, double radius)
+        {
+            var bikePointsUrl = string.Format(@"https://api.tfl.gov.uk/BikePoint?lat={0}&lon={1}&radius={2}", lat, lng, radius);
+
+            var responseString = GetResponseString(bikePointsUrl);
+            PlacesResponse placeResponse = JsonConvert.DeserializeObject<PlacesResponse>(responseString);
+            
+            return placeResponse.Places;
+        }
+        
+        private string GetResponseString(string url)
+        {
+            using (var wc = new WebClient())
+            {
+                wc.QueryString.Add("app_id", appId);
+                wc.QueryString.Add("app_key", appKey);
+
+                return wc.DownloadString(url);
+            }
         }
     }
 }

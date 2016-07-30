@@ -20,17 +20,7 @@
                 },
             };
             map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-            //locationMarkerListener = map.addListener('click', function (e) {
-            //    if (window.userMarker) {
-            //        userMarker.setMap(null);
-            //    }
-
-            //    userMarker = new google.maps.Marker({
-            //        position: e.latLng,
-            //        map: map
-            //    });
-            //});
+            markers = [];
         }
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -39,11 +29,19 @@
 <body>
     <div id="workspace">
         <div id="header">
-            <button class="actionButton" id="bikePointsButton">Show bike points</button>
+            <button class="actionButton leftAction" id="bikePointsButton">Show bike points</button>
+            <button class="actionButton leftAction" id="busStopsButton">Show bus stops</button>
+
+            <div id="radiusInput" class="rightAction radiusInput">
+                <input class="meterInput" id="dimentionInput" type="number" value="300" min="10" max="20000" />
+                <div class="dimensionText rightAction">(m)</div>
+            </div>
             <button class="togleButtonUnpressed" id="markLocationButton">Mark location</button>
+            <button class="actionButton rightAction" id="clearMarkersButton">Clear map</button>
         </div>
-        <div id="googleMap"/>
-        <div id="footer">footer
+        <div id="googleMap"></div>
+        
+        <div id="footer">
         </div>
     </div>
 </body>
