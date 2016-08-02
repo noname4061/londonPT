@@ -167,11 +167,12 @@
   <ItemGroup>
     <Compile Include="App_Start\Config.cs" />
     <Compile Include="Controllers\BikePointsController.cs" />
+    <Compile Include="Controllers\BusStopsController.cs" />
+    <Compile Include="Controllers\StopPointArrivalsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\TransportApiResponseParser.cs" />
-    <Compile Include="Models\BikePoint.cs" />
+    <Compile Include="Helpers\TflWebClient.cs" />
     <Compile Include="Pages\PublicTransport.aspx.cs">
       <DependentUpon>PublicTransport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

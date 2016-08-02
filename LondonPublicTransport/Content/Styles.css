@@ -1,26 +1,32 @@
 ﻿html, body, #workspace {
     width: 100%;
     height: 100%;
-    margin : auto;
+    margin : 0px;
+    padding: 0px;
 }
 #header {
-        position: absolute;
-        right: 115px;
-        left: 10px;
-        top: 10px;
-        z-index: 5;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-      }
+    position: absolute;
+    right: 115px;
+    left: 10px;
+    top: 10px;
+    z-index: 7;
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+}
 #googleMap {
     width: 100%;
     height: 100%;
     margin : auto;
 }
 #footer{
-    background-color: #ff0000;
-    height: 0%;
-    width: 100%;
+    overflow: visible;
+    display: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-color: lightgray;
+    height: 100%;
+    width: 408px;
     z-index: 6;
 }
 .leftAction {
@@ -110,5 +116,26 @@ input::-webkit-inner-spin-button {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
+}
+#sidePanelContent {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    width: 100%;
+    background: red;
+    height: 100%;
+    background-color: #ededed;
+    position: absolute;
+    top:0;
+    right: 0;
+    bottom: 0;
+    background-color: lightgray;
+    overflow: auto;
+}
+#hideSidePanelButton {
+    background: lightgray;
+    margin: 50px 0px 00px 400px;
+    border: solid 1px;
+    border-radius: 2px;
+    height: 40px;
+    width: 25px;
 }
