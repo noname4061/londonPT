@@ -76,7 +76,7 @@
 .radiusInput {
     display: none;
     height: 26px;
-    width: 65px;
+    width: 67px;
     padding: 0px 0px 1px 0px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -98,7 +98,7 @@ input::-webkit-inner-spin-button {
     float:left;
     height: 26px;
     width: 41px;
-    margin: -1px 0px 0px -1px;
+    margin: 0px -2px 0px -1px;
     padding: 1px 0px 0px 2px;
     border-style: solid;
     border-width: 0px 0px 0px 0px;
