@@ -12,13 +12,24 @@
     <script>
         function initialize() {
             var mapProp = {
-                center: new google.maps.LatLng(51.508742, -0.120850),
-                zoom: 13,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                zoomControl: true,
+                zoomControlOptions: {
+                    position: google.maps.ControlPosition.RIGHT_BOTTOM
+                },
+                mapTypeControl: false,
                 mapTypeControlOptions: {
                     style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                    position: google.maps.ControlPosition.TOP_RIGHT
+                    position: google.maps.ControlPosition.RIGHT_BOTTOM,
                 },
+                scaleControl: true,
+                streetViewControl: true,
+                streetViewControlOptions: {
+                    position: google.maps.ControlPosition.RIGHT_BOTTOM
+                },
+                fullscreenControl: false,
+                center: new google.maps.LatLng(51.508742, -0.120850),
+                zoom: 13,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
             bikeMarkers = [];
@@ -31,8 +42,8 @@
 <body>
     <div id="workspace">
         <div id="header">
-            <button class="actionButton leftAction" id="bikePointsButton">Show bike points</button>
-            <button class="actionButton leftAction" id="busStopsButton">Show bus stops</button>
+            <button class="actionButton leftAction" id="bikePointsButton">Bike points</button>
+            <button class="actionButton leftAction" id="busStopsButton">Bus stops</button>
 
             <div id="radiusInput" class="rightAction radiusInput">
                 <input class="meterInput" id="dimentionInput" type="number" value="300" min="10" max="20000"/>
@@ -46,8 +57,18 @@
         <div id="footer">
             <button id="hideSidePanelButton">◄</button>
             <div id="sidePanelContent">
-                <br/><br/>
+                <br/><br/><br/>
                 <div id="sidePanelShiftedContemt"></div>
+            </div>
+        </div>
+        <div style="position: absolute; left: 50%; top: 50%;">
+            <div style="position: relative; left: -50%; top: 50%;">
+                <div class="loader" id="spinner"></div>
+            </div>
+        </div>
+        <div style="position: absolute; left: 50%; bottom: 10px;">
+            <div style="position: relative; left: -50%; text-align: center;">
+                <label id="userMessageLabel"></label>
             </div>
         </div>
     </div>

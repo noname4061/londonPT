@@ -70,40 +70,54 @@ $(document).ready(function () {
 
 
 function ShowBikePoints() {
+    $('#spinner').css("display", "block");
     $.ajax({
         url: typeof userMarker !== "undefined" && userMarker ?
             "/transportapi/bikeplaces/" + userMarker.position.lat() + "/" + userMarker.position.lng() + "/" + $('#dimentionInput').val()
             : "/transportapi/bikeplaces",
-        //url: "https://api.tfl.gov.uk/BikePoint",
         type: "GET",
         complete: function(data) {
-            ProcessResponceData(data, "/Content/Icons/bicycle_pointer.png", "bikeMarkers", GetBikePointInfoWindowContent)
+            ProcessResponceData(data, "/Content/Icons/bicycle_pointer.png", "bikeMarkers", GetBikePointInfoWindowContent);
+            $('#spinner').css("display", "none");
         },
         succses: function (data) {
             console.log("succses");
+            $('#spinner').css("display", "none");
         },
         error: function (jqXHR, status, error) {
             console.log(error);
+            $('#spinner').css("display", "none");
         }
     });
 };
 
 function ShowBusStops() {
-    $.ajax({
-        url: typeof userMarker !== "undefined" && userMarker ?
-            "/transportapi/busstops/" + userMarker.position.lat() + "/" + userMarker.position.lng() + "/" + $('#dimentionInput').val()
-            : "/transportapi/busstops",
-        type: "GET",
-        complete: function (data) {
-            ProcessResponceData(data, "/Content/Icons/bus_pointer.png", "busStopsMarkers", GetBusStopInfoWindowContent, SetBusStopFooterMenuContent)
-        },
-        succses: function (data) {
-            console.log("succses");
-        },
-        error: function (jqXHR, status, error) {
-            console.log(error);
+    if (typeof userMarker !== "undefined" && userMarker) {
+        if ($('#dimentionInput').val() > 2000) {
+            ShowUserMessage("Radius was limited to 2km", 5000);
+            $('#dimentionInput').val(2000);
         }
-    });
+        $('#spinner').css("display", "block");
+        $.ajax({
+            url: "/transportapi/busstops/" + userMarker.position.lat() + "/" + userMarker.position.lng() + "/" + $('#dimentionInput').val(),
+            type: "GET",
+            complete: function (data) {
+                ProcessResponceData(data, "/Content/Icons/bus_pointer.png", "busStopsMarkers", GetBusStopInfoWindowContent, SetBusStopFooterMenuContent);
+                $('#spinner').css("display", "none");
+            },
+            succses: function (data) {
+                console.log("succses");
+                $('#spinner').css("display", "none");
+            },
+            error: function (jqXHR, status, error) {
+                console.log(error);
+                $('#spinner').css("display", "none");
+            }
+        });
+    }
+    else {
+        ShowUserMessage("For bus stops mark location first.", 5000);
+    }
 };
 
 function ProcessResponceData(data, iconLocation, markersArray, infoWindowFunction, footerMenuSetOnElementClickFunction) {
@@ -184,13 +198,14 @@ function GetBusStopInfoWindowContent(responseElement) {
 
 function SetBusStopFooterMenuContent(responseElement) {
     var footer = $('#sidePanelShiftedContemt')[0];
-
+    
     var naptanIds = [];
     for (var i = 0; i < responseElement.LineGroup.length; i++) {
         naptanIds.push(responseElement.LineGroup[i].NaptanIdReference);
     }
 
     if (naptanIds.length > 0) {
+        $('#spinner').css("display", "block");
         $.ajax({
             url: "/transportapi/stoppointarrivals/" + naptanIds.toString(),
             type: "GET",
@@ -202,18 +217,23 @@ function SetBusStopFooterMenuContent(responseElement) {
                     footer.innerHTML = data.responseText.slice(1, data.responseText.length - 1);
                 }
                 else {
+                    ShowUserMessage("There's no schedule for selected stop", 5000);
                     HideFooter();
                 }
+                $('#spinner').css("display", "none");
             },
             succses: function (data) {
                 console.log("succses");
+                $('#spinner').css("display", "none");
             },
             error: function (jqXHR, status, error) {
                 console.log(error);
+                $('#spinner').css("display", "none");
             }
         });
     }
     else {
+        ShowUserMessage("There's no schedule for selected stop", 5000);
         HideFooter();
     }
 }
@@ -226,4 +246,9 @@ function ShowFooter() {
 function HideFooter() {
     $('#footer').css("display", "none");
     isFooterVisible = false;
+}
+
+function ShowUserMessage(message, miliseconds) {
+    $("#userMessageLabel")[0].innerHTML = message;
+    $("#userMessageLabel").show().delay(miliseconds).fadeOut();
 }

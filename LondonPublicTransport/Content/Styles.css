@@ -6,9 +6,9 @@
 }
 #header {
     position: absolute;
-    right: 115px;
-    left: 10px;
-    top: 10px;
+    right: 5px;
+    left: 5px;
+    top: 5px;
     z-index: 7;
     text-align: center;
     font-family: 'Roboto','sans-serif';
@@ -26,7 +26,7 @@
     top: 0px;
     background-color: lightgray;
     height: 100%;
-    width: 408px;
+    width: 300px;
     z-index: 6;
 }
 .leftAction {
@@ -76,7 +76,7 @@
 .radiusInput {
     display: none;
     height: 26px;
-    width: 78px;
+    width: 65px;
     padding: 0px 0px 1px 0px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -99,17 +99,16 @@ input::-webkit-inner-spin-button {
     height: 26px;
     width: 41px;
     margin: -1px 0px 0px -1px;
-    padding: 1px 1px 0px 5px;
+    padding: 1px 0px 0px 2px;
     border-style: solid;
-    border-width: 1px 0px 1px 1px;
+    border-width: 0px 0px 0px 0px;
     border-color: #dbdbdb;
     font-weight: bold;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 .dimensionText {
-    width: 22px;
     margin: 5px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
+    padding: 0px 2px 0px 0px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     /*-khtml-user-select: none;*/
@@ -133,9 +132,48 @@ input::-webkit-inner-spin-button {
 }
 #hideSidePanelButton {
     background: lightgray;
-    margin: 50px 0px 00px 400px;
+    margin: 25% 0px 0px 97%;
     border: solid 1px;
     border-radius: 2px;
     height: 40px;
     width: 25px;
+}
+#userMessageLabel {
+    width: 100px;
+    line-height: 100%;
+    text-align: center;
+    display: none;
+    border: solid 1px;
+    border-color: lightgray;
+    background-color: lightgray;
+    border-radius: 3px;
+    padding: 2px;
+    color: #ff4444;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+.loader {
+    z-index: 10;
+    display: none;
+    border: 12px solid lightgray;
+    border-radius: 50%;
+    border-top: 12px solid gray;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.center {
+    position: absolute;
+    top: 45%;
+    left: 50%;
 }
